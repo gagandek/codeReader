@@ -34,7 +34,6 @@ import java.io.IOException;
 
 public class MainActivityQRStripped extends Activity {
 
-//    private static final String LOG_TAG = "MainActivityQRStripped";
     private static final String LOG_TAG = MainActivityQRStripped.class.getSimpleName();
 
     private final int CAMREA_CODE = 1;
@@ -116,6 +115,7 @@ public class MainActivityQRStripped extends Activity {
                         Log.i(LOG_TAG, "displayValue: " + displayValue);
                         String value = split[1];
                         // TODO: do something with the vale from QR code
+                        Log.d(LOG_TAG, "value: "+value);
                     }
                 }
             }
