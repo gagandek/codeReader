@@ -2,7 +2,6 @@ package com.example.codereader;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -32,7 +32,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
-public class MainActivityQRStripped extends Activity {
+public class MainActivityQRStripped extends AppCompatActivity {  //extends Activity
 
     private static final String LOG_TAG = MainActivityQRStripped.class.getSimpleName();
 
@@ -100,11 +100,11 @@ public class MainActivityQRStripped extends Activity {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
-
                 if (qrCodes.size() > 0) {
                     String displayValue = qrCodes.valueAt(0).displayValue;
-                    String[] split = displayValue.split("=");
-                    if (split.length == 2) {
+                    Log.d(LOG_TAG, "Value in raw text: " + displayValue);
+                    String[] split = displayValue.split("\\n");
+                    if (split.length > 0){        //min
                         Handler handler = new Handler(Looper.getMainLooper());
                         handler.post(new Runnable() {
                             @Override
@@ -112,15 +112,25 @@ public class MainActivityQRStripped extends Activity {
                                 cameraSource.release();
                             }
                         });
-                        Log.i(LOG_TAG, "displayValue: " + displayValue);
-                        String value = split[1];
                         // TODO: do something with the vale from QR code
-                        Log.d(LOG_TAG, "value: "+value);
+                        Log.d(LOG_TAG, "**************");
+                        Log.d(LOG_TAG, "raw data: "+displayValue);
+                        Log.d(LOG_TAG, "**************");
+
+                        doSomething(displayValue);
                     }
                 }
             }
         });
     }
+
+    private void doSomething(String rawData){
+        Intent intent = new Intent(this, DataHandlerActivity.class);
+        intent.putExtra("rawData", rawData);
+        startActivity(intent);
+    }
+
+
 
     private boolean permissionGranted() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
@@ -160,9 +170,9 @@ public class MainActivityQRStripped extends Activity {
                 finish();
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(this, SomeActivity.class);
+              /*  Intent intent = new Intent(this, DataHandlerActivity.class);
                 startActivity(intent);
-                this.finish();
+                this.finish();*/
             }
         }
     }

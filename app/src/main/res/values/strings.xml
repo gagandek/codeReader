@@ -3,4 +3,6 @@
     <string name="unique_id">Unique ID</string>
     <string name="read_data">Read Data</string>
     <string name="main_info">To read the patient information with the code-reader: please click on "\"Read Data"\" button </string>
+    <string name="data_activity">Data Activity</string>
+    <string name="info">Info</string>
 </resources>
