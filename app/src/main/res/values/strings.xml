@@ -5,4 +5,17 @@
     <string name="main_info">To read the patient information with the code-reader: please click on "\"Read Data"\" button </string>
     <string name="data_activity">Data Activity</string>
     <string name="info">Info</string>
+    <string name="patient_information">Patient Information</string>
+    <string name="tb">TB</string>
+    <string name="art">ART</string>
+    <string name="malaria">Malaria</string>
+    <string name="new_scan">Scan a new patient</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="tb_identifier">TB identifier</string>
+    <string name="sex">Sex</string>
+    <string name="state">State</string>
+    <string name="dob">D.o.b</string>
+    <string name="unique_ID">Unique ID</string>
+    <string name="tb_program">TB Program</string>
 </resources>

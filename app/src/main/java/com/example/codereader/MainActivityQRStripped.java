@@ -128,6 +128,7 @@ public class MainActivityQRStripped extends AppCompatActivity {  //extends Activ
         Intent intent = new Intent(this, DataHandlerActivity.class);
         intent.putExtra("rawData", rawData);
         startActivity(intent);
+        this.finish();
     }
 
 
