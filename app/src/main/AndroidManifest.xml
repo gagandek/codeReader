@@ -7,12 +7,26 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TB"></activity>
+        <activity
+            android:name=".ART"
+            android:label="@string/art"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChildProgram"
+            android:label="@string/child_program"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TB"
+            android:label="@string/tb_program"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DataHandlerActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:label="@string/patient_information"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +37,8 @@
         <activity
             android:name=".MainActivityQRStripped"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

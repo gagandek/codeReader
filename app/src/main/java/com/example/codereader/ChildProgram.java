@@ -2,49 +2,40 @@ package com.example.codereader;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TB extends AppCompatActivity {
+public class ChildProgram extends AppCompatActivity {
 
-    private static final String LOG_TAG = TB.class.getSimpleName();
+
+    private static final String LOG_TAG = ChildProgram.class.getSimpleName();
     private static final String STATE_COUNTER = "counter";
     private int mCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tb);
+        setContentView(R.layout.activity_child_program);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
         String firstName = intent.getStringExtra("firstName");
         String lastName = intent.getStringExtra("lastName");
         String sex = intent.getStringExtra("sex");
-        String dob = intent.getStringExtra("dob");
 
-        TextView first = (TextView) findViewById(R.id.editText_firstname);
+        TextView first = (TextView) findViewById(R.id.id_firstName_cp);
         first.setText(firstName);
 
-        TextView second = (TextView) findViewById(R.id.editText_lastname);
+        TextView second = (TextView) findViewById(R.id.id_lastname_cp);
         second.setText(lastName);
 
-        TextView textViewSex = (TextView) findViewById(R.id.editText_sex);
+        TextView textViewSex = (TextView) findViewById(R.id.id_gender_cp);
         textViewSex.setText(sex);
 
-        TextView textViewDob = (TextView) findViewById(R.id.editText_dob);
-        textViewDob.setText(dob);
-
     }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_COUNTER, mCounter);
-    }
-
-    public void searchInDB(View view) {
     }
 }

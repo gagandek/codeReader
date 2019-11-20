@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CodeReader</string>
+    <string name="tb_programme">TB Programme</string>
+    <string name="child_programme">Child Programme</string>
     <string name="unique_id">Unique ID</string>
     <string name="read_data">Read Data</string>
     <string name="main_info">To read the patient information with the code-reader: please click on "\"Read Data"\" button </string>
@@ -8,7 +10,7 @@
     <string name="patient_information">Patient Information</string>
     <string name="tb">TB</string>
     <string name="art">ART</string>
-    <string name="malaria">Malaria</string>
+    <string name="child_program">Child Programme</string>
     <string name="new_scan">Scan a new patient</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -18,4 +20,8 @@
     <string name="dob">D.o.b</string>
     <string name="unique_ID">Unique ID</string>
     <string name="tb_program">TB Program</string>
+    <string name="todo">TODO</string>
+    <string name="enrollment_date">Date of enrollment</string>
+    <string name="gender">Gender</string>
+    <string name="tb_checked">TB Checked?</string>
 </resources>

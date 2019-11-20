@@ -24,46 +24,96 @@ public class DataHandlerActivity extends AppCompatActivity {
         String rawData = intent.getStringExtra("rawData");
         setContentView(R.layout.activity_data_handler);
 
-        if(rawData!= null){
+        if (rawData != null) {
 
-            Log.d(LOG_TAG, ""+rawData);
+            Log.d(LOG_TAG, "" + rawData);
             textView = (TextView) findViewById(R.id.info_text);
             textView.setText(rawData);
             this.rawData = rawData;
-        }else{
+        } else {
             Log.d(LOG_TAG, " the rawData is null");
         }
-     }
+    }
 
     public void scanANewPatient(View view) {
         finish();
-        /** not the correct way to do it */
+        /** not the correct way to do it.. ? */
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void reDirectToMalaria(View view) {
+    public void reDirectToChildProgramme(View view) {
+
+        Intent intent = getParams(ChildProgram.class);
+        startActivity(intent);
     }
 
     public void reDirectToART(View view) {
+
+        Intent intent = getParams(ART.class);
+        startActivity(intent);
     }
 
     public void reDirectToTB(View view) {
+        Intent intent = getParams(TB.class);
+        startActivity(intent);
+    }
+
+    private Intent getParams(Class classToCall) {
+
         String[] splited = rawData.split("\\r?\\n");
         String name = splited[0].substring(5).trim();
         String sex = splited[1].substring(4).trim();
         String dob = splited[2].substring(6).trim();
 
-        Log.d(LOG_TAG, "******************");
-        Log.d(LOG_TAG, "name: " + name);
+        String[] names = getNames(name);
+
+        Log.d(LOG_TAG, "************************");
+        Log.d(LOG_TAG, "Class: " + classToCall.getSimpleName());
+        Log.d(LOG_TAG, "Full name: " + name);
+        Log.d(LOG_TAG, "first name: " + names[0]);
+        Log.d(LOG_TAG, "last name: " + names[1]);
         Log.d(LOG_TAG, "sex: " + sex);
         Log.d(LOG_TAG, "dob: " + dob);
-        Log.d(LOG_TAG, "******************");
+        Log.d(LOG_TAG, "************************");
 
-        Intent intent = new Intent(this, TB.class);
+        Intent intent = new Intent(this, classToCall);
         intent.putExtra("name", name);
+        intent.putExtra("firstName", names[0]);
+        intent.putExtra("lastName", names[1]);
         intent.putExtra("sex", sex);
         intent.putExtra("dob", dob);
-        startActivity(intent);
+
+        return intent;
+    }
+
+    public String[] getNames(String fullName){
+
+        String[] names = fullName.split(" ");
+        if (2 == names.length) {
+            //only first and last name
+            return names;
+
+        } else if (names.length > 2) {
+            //more than one names - first, middle, last etc
+
+            String wholeFirstName = null;
+            for (int i = 0; i < names.length; i++) {
+                wholeFirstName += names[i];
+                wholeFirstName += " ";
+            }
+            String[] moreNames = new String[2];
+            moreNames[0] = wholeFirstName;
+
+            moreNames[1] = names[names.length - 1];
+            return moreNames;
+
+        } else if(names.length == 1){
+            //one name
+            return new String[] {fullName};
+        }
+
+        return null;
     }
 }
+
