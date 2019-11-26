@@ -24,4 +24,9 @@
     <string name="enrollment_date">Date of enrollment</string>
     <string name="gender">Gender</string>
     <string name="tb_checked">TB Checked?</string>
+    <string name="add_new_pat">Add a new patient</string>
+    <string name="add">Add</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
 </resources>

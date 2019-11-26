@@ -3,13 +3,12 @@ package com.example.codereader;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String STATE_COUNTER = "counter";
-    private int mCounter;
+    private int idCounter = 111111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +24,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        new WSCallTask().execute();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(STATE_COUNTER, mCounter);
+    }
+
+    public void addToDb(View view) {
+        Intent intent = new Intent(this, AddNewPatient.class);
+        intent.putExtra("id", generateID());
+        startActivity(intent);
+    }
+
+    public int generateID(){
+        idCounter +=1;
+        return idCounter;
     }
 }

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.codereader">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +14,10 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".AddNewPatient"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/add_new_pat" />
         <activity
             android:name=".ART"
             android:label="@string/art"
@@ -26,7 +34,7 @@
             android:name=".DataHandlerActivity"
             android:label="@string/patient_information"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,9 +46,7 @@
             android:name=".MainActivityQRStripped"
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

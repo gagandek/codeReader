@@ -107,7 +107,7 @@
         android:id="@+id/id_searchbttn_cp"
         android:layout_width="62dp"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/my_button_bg"
         android:contentDescription="@string/info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

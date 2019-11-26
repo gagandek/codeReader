@@ -19,16 +19,16 @@ public class ART extends AppCompatActivity {
         String sex = intent.getStringExtra("sex");
         String dob = intent.getStringExtra("dob");
 
-        TextView first = (TextView) findViewById(R.id.id_firstname_art);
+        TextView first = (TextView) findViewById(R.id.id_firstname_anp);
         first.setText(firstName);
 
-        TextView second = (TextView) findViewById(R.id.id_lastname_art);
+        TextView second = (TextView) findViewById(R.id.id_lastname_anp);
         second.setText(lastName);
 
-        TextView textViewSex = (TextView) findViewById(R.id.id_gender_art);
+        TextView textViewSex = (TextView) findViewById(R.id.id_gender_anp);
         textViewSex.setText(sex);
 
-        TextView textViewdob = (TextView) findViewById(R.id.id_dob_art);
+        TextView textViewdob = (TextView) findViewById(R.id.id_dob_anp);
         textViewdob.setText(dob);
     }
 }

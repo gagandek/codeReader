@@ -1,0 +1,3 @@
+[123456, Kari Nordman, Female, 15/11/1995]
+[654321, Ola Nordman, Male, -]
+[222222, Ole Bum, Male, 05/08/1990]
