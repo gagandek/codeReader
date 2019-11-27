@@ -15,11 +15,6 @@ public class DBHandler{
 
     private List<Patient> patients = new ArrayList<>();
 
-    //private String path = "C:/Users/gagan/Google Drive/ownReader/app/src/main/res/";
-    //private String pathShort = "src/main/res/";
-    //File path2 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
-    //File file = new File(path, "/" + "db.txt");
-
     public void addPatient(Patient patient){
         Log.d(LOG_TAG, "****** kommer inn i add patient");
         String tuple = "[ " + patient.getUniqueID()

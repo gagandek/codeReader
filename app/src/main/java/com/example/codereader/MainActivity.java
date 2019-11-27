@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String STATE_COUNTER = "counter";
-    private int idCounter = 111111;
+    public static int idCounter = 111111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void addToDb(View view) {
         Intent intent = new Intent(this, AddNewPatient.class);
-        intent.putExtra("id", generateID());
         startActivity(intent);
     }
 
-    public int generateID(){
+    public static int generateID(){
         idCounter +=1;
         return idCounter;
     }

@@ -1,6 +1,5 @@
 package com.example.codereader;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,22 +18,12 @@ public class AddNewPatient extends AppCompatActivity {
 
     DBHandler dbHandler;
     private static final String LOG_TAG = AddNewPatient.class.getSimpleName();
-    int uniqueID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHandler = new DBHandler();
-
-        Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 1);
-        uniqueID = id;
         setContentView(R.layout.activity_add_new_patient);
-
-        TextView textViewId = (TextView) findViewById(R.id.id_uniqueid_anp);
-        textViewId.setText("" + id);
-        textViewId.setEnabled(false);
-
     }
 
     public void addPatientToDB(View view) {
@@ -52,9 +41,9 @@ public class AddNewPatient extends AppCompatActivity {
         int selectedGender = radioGroup.getCheckedRadioButtonId();
         Button btnDisplay = (RadioButton) findViewById(selectedGender);
 
-        if (!validate(firstName, lastName, dob)){
+        if (!validate(firstName, lastName, dob)) {
             Toast.makeText(getApplicationContext(), "Missing input...", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
 
             if (btnDisplay == null) {
                 Toast.makeText(getApplicationContext(), "Missing input", Toast.LENGTH_SHORT).show();
@@ -62,10 +51,14 @@ public class AddNewPatient extends AppCompatActivity {
             }
             String gender = (String) btnDisplay.getText();
             try {
-                dbHandler.addPatient(new Patient(uniqueID, firstName + " " + lastName, firstName, lastName, dob, gender));
+                int newId = MainActivity.generateID();
+                dbHandler.addPatient(new Patient(newId, firstName + " " + lastName, firstName, lastName, dob, gender));
+                Toast.makeText(getApplicationContext(), "Patient added with id: " + newId, Toast.LENGTH_LONG).show();
+                Thread.sleep(500);
                 textViewFirstName.setText("");
                 textViewLastName.setText("");
                 textViewDob.setText("");
+                Log.d(LOG_TAG, "Patient added: \n" + newId);
                 finish();
             } catch (Exception e) {
                 Log.d(LOG_TAG, "could not add the patient");

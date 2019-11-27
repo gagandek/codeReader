@@ -7,6 +7,25 @@
     tools:context=".MainActivityQRStripped"
     tools:ignore="MissingDefaultResource">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/id_searchbutton_art2"
+        android:layout_width="44dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginRight="184dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_addpat_main"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86"
+        app:maxImageSize="30dp"
+        app:srcCompat="@android:drawable/ic_menu_search"
+        app:useCompatPadding="false"
+        tools:targetApi="lollipop" />
+
     <EditText
         android:id="@+id/id_field"
         android:layout_width="wrap_content"
@@ -15,7 +34,8 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/unique_id"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:maxLength="@integer/id_length"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,35 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddNewPatient">
 
-    <TextView
-        android:id="@+id/id_idlabel_anp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/unique_ID"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425" />
-
-    <EditText
-        android:id="@+id/id_uniqueid_anp"
-        android:layout_width="100dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="344dp"
-        android:ems="10"
-        android:hint="@string/unique_ID"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:maxLength="@integer/id_length"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_idlabel_anp"
-        app:layout_constraintVertical_bias="0.428" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
