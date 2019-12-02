@@ -201,5 +201,9 @@ public class MainActivityQRStripped extends AppCompatActivity {  //extends Activ
         builder.show();
     }
 
+    public void searchPatientInDb(View view) {
+        //TODO: search for patient from the list and go to the same activity as for the scanner part.
+        //call doSomethingMethod(radData)
+    }
 }
 

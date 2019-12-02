@@ -44,18 +44,21 @@ public class DataHandlerActivity extends AppCompatActivity {
 
     public void reDirectToChildProgramme(View view) {
 
-        Intent intent = getParams(ChildProgram.class);
+//        Intent intent = getParams(ChildProgram.class);
+        Intent intent = getParams2(ChildProgram.class);
         startActivity(intent);
     }
 
     public void reDirectToART(View view) {
 
-        Intent intent = getParams(ART.class);
+//        Intent intent = getParams(ART.class);
+        Intent intent = getParams2(ART.class);
         startActivity(intent);
     }
 
     public void reDirectToTB(View view) {
-        Intent intent = getParams(TB.class);
+//        Intent intent = getParams(TB.class);
+        Intent intent = getParams2(TB.class);
         startActivity(intent);
     }
 
@@ -83,6 +86,49 @@ public class DataHandlerActivity extends AppCompatActivity {
         intent.putExtra("lastName", names[1]);
         intent.putExtra("sex", sex);
         intent.putExtra("dob", dob);
+
+        return intent;
+    }
+
+    public Intent getParams2(Class classToCall){
+        String[] splited = rawData.split("\\r?\\n");
+        String name = null;
+        String sex = null, dob = null, uniqueID = null;
+
+        for(String s : splited){
+            if(s.contains("Name")){
+                name = s.substring(5).trim();
+            }
+            if(s.contains("Sex")){
+                sex = s.substring(4).trim();
+            }
+            if(s.contains("D.o.b")){
+                dob = s.substring(6).trim();
+            }
+            if(s.contains("UniqueID")){
+                uniqueID = s.substring(9).trim();
+            }
+        }
+
+        String[] names = getNames(name);
+
+        Log.d(LOG_TAG, "************************");
+        Log.d(LOG_TAG, "Class: " + classToCall.getSimpleName());
+        Log.d(LOG_TAG, "Full name: " + name);
+        Log.d(LOG_TAG, "first name: " + names[0]);
+        Log.d(LOG_TAG, "last name: " + names[1]);
+        Log.d(LOG_TAG, "sex: " + sex);
+        Log.d(LOG_TAG, "dob: " + dob);
+        Log.d(LOG_TAG, "uniqueID: " + uniqueID);
+        Log.d(LOG_TAG, "************************");
+
+        Intent intent = new Intent(this, classToCall);
+        intent.putExtra("name", name);
+        intent.putExtra("firstName", names[0]);
+        intent.putExtra("lastName", names[1]);
+        intent.putExtra("sex", sex);
+        intent.putExtra("dob", dob);
+        intent.putExtra("uniqueID", uniqueID);
 
         return intent;
     }

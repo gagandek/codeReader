@@ -13,7 +13,7 @@ import java.util.List;
 public class DBHandler{
     private static final String LOG_TAG = DBHandler.class.getSimpleName();
 
-    private List<Patient> patients = new ArrayList<>();
+    public static List<Patient> patients = new ArrayList<>();
 
     public void addPatient(Patient patient){
         Log.d(LOG_TAG, "****** kommer inn i add patient");

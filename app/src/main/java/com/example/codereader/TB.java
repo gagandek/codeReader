@@ -24,6 +24,7 @@ public class TB extends AppCompatActivity {
         String lastName = intent.getStringExtra("lastName");
         String sex = intent.getStringExtra("sex");
         String dob = intent.getStringExtra("dob");
+        String uniqueID = intent.getStringExtra("uniqueID");
 
         TextView first = (TextView) findViewById(R.id.editText_firstname);
         first.setText(firstName);
@@ -37,6 +38,11 @@ public class TB extends AppCompatActivity {
         TextView textViewDob = (TextView) findViewById(R.id.editText_dob);
         textViewDob.setText(dob);
 
+        if(null != uniqueID){
+            TextView textViewID = (TextView) findViewById(R.id.editText_unique_id);
+            textViewID.setText(uniqueID);
+        }
+
     }
 
     @Override
@@ -46,5 +52,6 @@ public class TB extends AppCompatActivity {
     }
 
     public void searchInDB(View view) {
+        //TODO: search in the list of all the patients. DBHandler class has the list.
     }
 }

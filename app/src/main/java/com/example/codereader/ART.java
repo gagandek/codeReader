@@ -18,6 +18,7 @@ public class ART extends AppCompatActivity {
         String lastName = intent.getStringExtra("lastName");
         String sex = intent.getStringExtra("sex");
         String dob = intent.getStringExtra("dob");
+        String uniqueID = intent.getStringExtra("uniqueID");
 
         TextView first = (TextView) findViewById(R.id.id_firstname_anp);
         first.setText(firstName);
@@ -30,5 +31,10 @@ public class ART extends AppCompatActivity {
 
         TextView textViewdob = (TextView) findViewById(R.id.id_dob_anp);
         textViewdob.setText(dob);
+
+        if(null!=uniqueID){
+            TextView textViewID = (TextView) findViewById(R.id.id_uniqueid_anp);
+            textViewID.setText(uniqueID);
+        }
     }
 }
