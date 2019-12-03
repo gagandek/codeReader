@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codereader.db.DBHandler;
-import com.example.codereader.model.Patient;
 
 public class AddNewPatient extends AppCompatActivity {
 
@@ -51,15 +50,19 @@ public class AddNewPatient extends AppCompatActivity {
             }
             String gender = (String) btnDisplay.getText();
             try {
-                int newId = MainActivity.generateID();
-                dbHandler.addPatient(new Patient(newId, firstName + " " + lastName, firstName, lastName, dob, gender));
-                Toast.makeText(getApplicationContext(), "Patient added with id: " + newId, Toast.LENGTH_LONG).show();
-                Thread.sleep(500);
-                textViewFirstName.setText("");
-                textViewLastName.setText("");
-                textViewDob.setText("");
-                Log.d(LOG_TAG, "Patient added: \n" + newId);
-                finish();
+                String newId = dbHandler.addPatient2(new String[]{firstName+ " " +lastName, firstName, lastName, dob, gender});
+                if(null != newId){
+                    Toast.makeText(getApplicationContext(), "Patient added with id: " + newId, Toast.LENGTH_LONG).show();
+                    Thread.sleep(500);
+                    textViewFirstName.setText("");
+                    textViewLastName.setText("");
+                    textViewDob.setText("");
+                    Log.d(LOG_TAG, "Patient added: \n" + newId);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Patient already exists", Toast.LENGTH_LONG).show();
+                }
+
             } catch (Exception e) {
                 Log.d(LOG_TAG, "could not add the patient");
             }

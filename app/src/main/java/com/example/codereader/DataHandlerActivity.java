@@ -44,20 +44,17 @@ public class DataHandlerActivity extends AppCompatActivity {
 
     public void reDirectToChildProgramme(View view) {
 
-//        Intent intent = getParams(ChildProgram.class);
         Intent intent = getParams2(ChildProgram.class);
         startActivity(intent);
     }
 
     public void reDirectToART(View view) {
 
-//        Intent intent = getParams(ART.class);
         Intent intent = getParams2(ART.class);
         startActivity(intent);
     }
 
     public void reDirectToTB(View view) {
-//        Intent intent = getParams(TB.class);
         Intent intent = getParams2(TB.class);
         startActivity(intent);
     }
@@ -133,7 +130,7 @@ public class DataHandlerActivity extends AppCompatActivity {
         return intent;
     }
 
-    public String[] getNames(String fullName){
+    public static String[] getNames(String fullName){
 
         String[] names = fullName.split(" ");
         if (2 == names.length) {

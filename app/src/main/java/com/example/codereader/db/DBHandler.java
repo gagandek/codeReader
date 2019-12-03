@@ -2,64 +2,100 @@ package com.example.codereader.db;
 
 import android.os.Environment;
 import android.util.Log;
+
 import com.example.codereader.model.Patient;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.util.Map;
+
+import static com.example.codereader.MainActivity.patientsFromDb;
 
 public class DBHandler{
     private static final String LOG_TAG = DBHandler.class.getSimpleName();
 
-    public static List<Patient> patients = new ArrayList<>();
+    final String INSTALLATION_DIR = "Android/data/dhis";
+    final String dataFile = "data.txt";
+    public static int idCounter = patientsFromDb.size();
 
-    public void addPatient(Patient patient){
-        Log.d(LOG_TAG, "****** kommer inn i add patient");
-        String tuple = "[ " + patient.getUniqueID()
-                + ", " + patient.getFullname()
-                + ", " + patient.getGender() +
-                ", " + patient.getDob() + "]\n";
 
-        if(contains(patient)){
-            patients.add(patient);
-            Log.d(LOG_TAG, "Patient added to the list");
-        }else{
-            Log.d(LOG_TAG, "Patient already exists");
+    public String addPatient2(String[] params){
+        boolean retValue = checkDuplicate(new Patient(null, params[0], params[1], params[2], params[3], params[4]));
+
+        if(!retValue){
+            String id = generateID();
+            Patient patient = new Patient(id, params[0], params[1], params[2], params[3], params[4]);
+            String tuple = "[" + patient.getUniqueID()
+                    + ", " + patient.getFullname().trim()
+                    + ", " + patient.getGender().trim() +
+                    ", " + patient.getDob().trim() + "]\n";
+
+            writeToFile(tuple, patient, retValue);
+            return id;
         }
+        return null;
     }
 
-    public boolean contains(Patient patient){
-        for(Patient p : patients){
-            if(p.getUniqueID() == patient.getUniqueID()){
-                return false;
-            }
-        }
-        return true;
-    }
+    public boolean writeToFile(String tuple, Patient patient, boolean status){
 
-    private void writeToFile(String tuple) {
-        final File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/Datafiles");
+        File externalStorageDirectory = Environment.getExternalStorageDirectory();
+        File parent = new File(externalStorageDirectory,INSTALLATION_DIR);
+        File installation = new File(parent, dataFile);
 
-        if(!path.exists()){
-            path.mkdirs();
-        }
-        final File file = new File(path, "db.txt");
+        boolean val = false;
         try{
-            file.createNewFile();
-            FileOutputStream fout = new FileOutputStream(file);
-            OutputStreamWriter myOutWriter = new OutputStreamWriter(fout);
-            myOutWriter.append(tuple);
-            myOutWriter.close();
-            fout.flush();
-            fout.close();
-        }catch (IOException e){
-            e.printStackTrace();
-            Log.d(LOG_TAG, "could not add to the file");
+            if(!installation.exists()){
+                if(!parent.exists()){
+                    boolean mkdir = parent.mkdir();
+                    Log.d(LOG_TAG, "mkdir: " + mkdir);
+                }
+                val = writeInstallationFile(installation, tuple, patient, status);
+            }else{
+                val = writeInstallationFile(installation, tuple, patient, status);
+                Log.i(LOG_TAG, "writing to file: success");
+            }
+            return val;
+        }catch (Exception e){
+            Log.d(LOG_TAG, "Exception while writing to file");
+            return val;
         }
     }
-    public void getPatient(int id) {
 
+    private boolean writeInstallationFile(File installation, String tuple, Patient patient, boolean status) throws Exception {
+        FileOutputStream out = new FileOutputStream(installation, true);
+        OutputStreamWriter myOutWriter = new OutputStreamWriter(out);
+
+        if(!status){
+            myOutWriter.append(tuple);
+            Log.d(LOG_TAG, "Written to the file");
+        }
+
+        myOutWriter.close();
+        out.flush();
+        out.close();
+        return status;
+    }
+
+    public static String generateID() {
+        idCounter += 1;
+        DecimalFormat decimalFormat = new DecimalFormat("000000");
+        return decimalFormat.format(idCounter);
+    }
+
+
+
+    private static boolean checkDuplicate(Patient patient){
+       for(Map.Entry<String, Patient> entry : patientsFromDb.entrySet()){
+           String fullName = entry.getValue().getFullname();
+           String gender = entry.getValue().getGender();
+           String dob= entry.getValue().getDob();
+
+           if(patient.getFullname().equals(fullName) && patient.getGender().equals(gender) && patient.getDob().equals(dob)){
+               return true;
+           }
+       }
+       return false;
     }
 }

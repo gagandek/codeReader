@@ -42,7 +42,6 @@ public class TB extends AppCompatActivity {
             TextView textViewID = (TextView) findViewById(R.id.editText_unique_id);
             textViewID.setText(uniqueID);
         }
-
     }
 
     @Override

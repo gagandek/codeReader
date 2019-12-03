@@ -1,10 +1,10 @@
 package com.example.codereader.model;
 
 public class Patient {
-    private int uniqueID;
-    private String fullName, firstName, lastName, dob, gender;
+//    private int uniqueID;
+    private String uniqueID, fullName, firstName, lastName, dob, gender;
 
-    public Patient(int uniqueID, String fullName, String firstName, String lastName, String dob, String gender) {
+    public Patient(String uniqueID, String fullName, String firstName, String lastName, String dob, String gender) {
         this.uniqueID = uniqueID;
         this.fullName = fullName;
         this.firstName = firstName;
@@ -13,11 +13,11 @@ public class Patient {
         this.gender = gender;
     }
 
-    public int getUniqueID() {
+    public String getUniqueID() {
         return uniqueID;
     }
 
-    public void setUniqueID(int uniqueID) {
+    public void setUniqueID(String uniqueID) {
         this.uniqueID = uniqueID;
     }
 
@@ -64,12 +64,12 @@ public class Patient {
     @Override
     public String toString() {
         return "[" + uniqueID
-                + " "
+                + ", "
                 +fullName
-                +" "
+                +", "
                 +gender
-                +" "
+                +", "
                 +dob
-                +" ]";
+                +"]";
     }
 }
