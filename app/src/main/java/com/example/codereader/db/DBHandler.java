@@ -3,6 +3,7 @@ package com.example.codereader.db;
 import android.os.Environment;
 import android.util.Log;
 
+import com.example.codereader.DataHandlerActivity;
 import com.example.codereader.model.Patient;
 
 import java.io.File;
@@ -20,7 +21,6 @@ public class DBHandler{
     final String dataFile = "data.txt";
     public static int idCounter = patientsFromDb.size();
 
-
     public String addPatient2(String[] params){
         boolean retValue = checkDuplicate(new Patient(null, params[0], params[1], params[2], params[3], params[4]));
 
@@ -33,6 +33,7 @@ public class DBHandler{
                     ", " + patient.getDob().trim() + "]\n";
 
             writeToFile(tuple, patient, retValue);
+            patientsFromDb.put(id, patient);
             return id;
         }
         return null;
@@ -98,4 +99,13 @@ public class DBHandler{
        }
        return false;
     }
+
+    public static void findPatient(String input) {
+        //TODO: go tru map, find a match, send it (Patient) to the DataHandlerActivity w/data.
+        if(patientsFromDb.containsKey(input)){
+            Patient patient = patientsFromDb.get(input);
+            DataHandlerActivity.redirect(patient);
+        }
+    }
+
 }

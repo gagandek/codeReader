@@ -1,5 +1,7 @@
 package com.example.codereader;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,11 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.codereader.db.DBHandler;
 
 public class AddNewPatient extends AppCompatActivity {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     DBHandler dbHandler;
     private static final String LOG_TAG = AddNewPatient.class.getSimpleName();
 
@@ -23,6 +28,8 @@ public class AddNewPatient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         dbHandler = new DBHandler();
         setContentView(R.layout.activity_add_new_patient);
+        checkWritePermissions();
+        checkReadPermissions();
     }
 
     public void addPatientToDB(View view) {
@@ -50,8 +57,8 @@ public class AddNewPatient extends AppCompatActivity {
             }
             String gender = (String) btnDisplay.getText();
             try {
-                String newId = dbHandler.addPatient2(new String[]{firstName+ " " +lastName, firstName, lastName, dob, gender});
-                if(null != newId){
+                String newId = dbHandler.addPatient2(new String[]{firstName + " " + lastName, firstName, lastName, dob, gender});
+                if (null != newId) {
                     Toast.makeText(getApplicationContext(), "Patient added with id: " + newId, Toast.LENGTH_LONG).show();
                     Thread.sleep(500);
                     textViewFirstName.setText("");
@@ -59,7 +66,7 @@ public class AddNewPatient extends AppCompatActivity {
                     textViewDob.setText("");
                     Log.d(LOG_TAG, "Patient added: \n" + newId);
                     finish();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Patient already exists", Toast.LENGTH_LONG).show();
                 }
 
@@ -75,5 +82,73 @@ public class AddNewPatient extends AppCompatActivity {
         }
         Toast.makeText(getApplicationContext(), "Missing input", Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    public boolean checkWritePermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not  granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                Log.d(LOG_TAG, "first");
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
+
+        }else{
+            // Permission has already been granted
+            Log.d(LOG_TAG, "Permission already granted");
+        }
+        return true;
+    }
+
+    public boolean checkReadPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not  granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                Log.d(LOG_TAG, "first");
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
+
+        }else{
+            // Permission has already been granted
+            Log.d(LOG_TAG, "Permission already granted");
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
     }
 }

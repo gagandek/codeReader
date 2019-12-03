@@ -8,7 +8,7 @@
     tools:ignore="MissingDefaultResource">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/id_searchbutton_art3"
+        android:id="@+id/id_searchbutton_qr"
         android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -26,7 +26,7 @@
         tools:targetApi="lollipop" />
 
     <EditText
-        android:id="@+id/id_field"
+        android:id="@+id/id_field_qr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -49,7 +49,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="112dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/id_field"
+        app:layout_constraintBottom_toTopOf="@+id/id_field_qr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

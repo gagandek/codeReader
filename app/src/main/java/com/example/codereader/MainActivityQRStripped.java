@@ -17,6 +17,7 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.codereader.model.Patient;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -202,8 +204,18 @@ public class MainActivityQRStripped extends AppCompatActivity {  //extends Activ
     }
 
     public void searchPatientInDb(View view) {
-        //TODO: search for patient from the list and go to the same activity as for the scanner part.
-        //call doSomethingMethod(radData)
+        TextView textView = (TextView)findViewById(R.id.id_field_qr);
+        String input = textView.getText().toString();
+
+        if(MainActivity.patientsFromDb.containsKey(input.trim())){
+            Patient patient = MainActivity.patientsFromDb.get(input);
+
+            String tuple = "[" + patient.getUniqueID()
+                    + ", " + patient.getFullname().trim()
+                    + ", " + patient.getGender().trim() +
+                    ", " + patient.getDob().trim() + "]";
+            doSomething(tuple);
+        }
     }
 }
 

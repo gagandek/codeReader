@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.codereader.model.Patient;
+
 public class DataHandlerActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = DataHandlerActivity.class.getSimpleName();
@@ -157,6 +159,10 @@ public class DataHandlerActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    public static void redirect(Patient patient){
+
     }
 }
 
