@@ -1,6 +1,7 @@
 package com.example.codereader;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,15 +66,24 @@ public class AddNewPatient extends AppCompatActivity {
                     textViewLastName.setText("");
                     textViewDob.setText("");
                     Log.d(LOG_TAG, "Patient added: \n" + newId);
+                    startPrintActivity(QRCodeGenerator.getPath(), newId);
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Patient already exists", Toast.LENGTH_LONG).show();
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 Log.d(LOG_TAG, "could not add the patient");
             }
         }
+    }
+
+    private void startPrintActivity(String path, String id) {
+        Intent intent = new Intent(this, PrintQRCode.class);
+        intent.putExtra("path", path);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     private boolean validate(String firstName, String lastName, String dob) {

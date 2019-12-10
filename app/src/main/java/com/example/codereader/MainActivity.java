@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static Map<String, Patient> patientsFromDb;
     final static String INSTALLATION_DIR = "Android/data/dhis";
     final static String dataFile = "data.txt";
+    public static int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         patientsFromDb = new HashMap<>();
         checkReadPermissions();
         readFromDb();   //fetching data
+        counter = patientsFromDb.size();
     }
 
     public void readData(View view) {
@@ -68,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
                     boolean mkdir = parent.mkdir();
                     Log.d(LOG_TAG, "mkdir: " + mkdir);
                     Log.d(LOG_TAG, "could not find the file");
-                    return;
                 }
-            }else{
+            } else {
+                Log.d(LOG_TAG, "----> reading the file");
                 String rawData = readInstallationFile(installation);
                 addToMap(rawData);
             }
@@ -89,22 +91,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static void addToMap(String rawData) {
-
+        int counter = 0;
         String[] tuples = rawData.split("\\r?\\n");
         String name, sex, dob, uniqueID;
 
         for (String t : tuples) {
+            counter++;
             String[] tupleArray = t.split(",");
             uniqueID = tupleArray[0].substring(1).trim();
             name = tupleArray[1].trim();
             sex = tupleArray[2].trim();
-            dob = tupleArray[3].substring(0, tupleArray[3].length()-1).trim();
+            dob = tupleArray[3].substring(0, tupleArray[3].length() - 1).trim();
 
             String[] names = DataHandlerActivity.getNames(name);
             Patient p = new Patient(uniqueID, name, names[0], names[1], dob, sex);
             patientsFromDb.put(uniqueID, p);
             Log.d(LOG_TAG, p.toString());
         }
+        Log.d(LOG_TAG, "counter: " + counter);
     }
 
     public boolean checkReadPermissions() {
@@ -123,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             }
 
-        }else{
+        } else {
             // Permission has already been granted
             Log.d(LOG_TAG, "Permission already granted");
         }

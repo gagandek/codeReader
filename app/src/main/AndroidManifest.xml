@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.codereader">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_dhis"
@@ -15,9 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PrintQRCode"
+            android:label="@string/printCode"
+            android:parentActivityName=".AddNewPatient" />
+        <activity
             android:name=".AddNewPatient"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/add_new_pat" />
+            android:label="@string/add_new_pat"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ART"
             android:label="@string/art"
@@ -48,5 +48,10 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
     </application>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
