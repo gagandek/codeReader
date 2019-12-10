@@ -110,30 +110,28 @@
         android:id="@+id/id_datepicker_anp"
         android:layout_width="283dp"
         android:layout_height="223dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         android:onClick="addDateOfBirth"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.34" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/id_date_anp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="124dp"
         android:text="@string/date_of_birth"
         app:layout_constraintBottom_toTopOf="@+id/id_datepicker_anp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.579"
         app:layout_constraintStart_toEndOf="@+id/id_genderlabel_anp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.733" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

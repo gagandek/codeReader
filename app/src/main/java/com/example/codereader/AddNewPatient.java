@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,11 +19,14 @@ import androidx.core.content.ContextCompat;
 
 import com.example.codereader.db.DBHandler;
 
+import java.util.Calendar;
+
 public class AddNewPatient extends AppCompatActivity {
 
+    private static final String LOG_TAG = AddNewPatient.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     DBHandler dbHandler;
-    private static final String LOG_TAG = AddNewPatient.class.getSimpleName();
+    final Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,9 @@ public class AddNewPatient extends AppCompatActivity {
         String lastName = textViewLastName.getText().toString();
 
         TextView textViewDob = (TextView) findViewById(R.id.id_date_anp);
-        String dob = textViewDob.getText().toString();
+//        String dob = textViewDob.getText().toString();
 
+        String dob = addDateOfBirth(view);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiobutton_group);
         int selectedGender = radioGroup.getCheckedRadioButtonId();
         Button btnDisplay = (RadioButton) findViewById(selectedGender);
@@ -161,4 +166,15 @@ public class AddNewPatient extends AppCompatActivity {
             // permissions this app might request.
         }
     }
+
+    public String addDateOfBirth(View view) {
+        DatePicker datePicker = (DatePicker)findViewById(R.id.id_datepicker_anp);
+        String date = ""+datePicker.getDayOfMonth();
+        String month = ""+datePicker.getMonth();
+        String year = ""+datePicker.getYear();
+        String dateOfBirth = date+"-"+month+"-"+year;
+
+        return dateOfBirth;
+    }
+
 }

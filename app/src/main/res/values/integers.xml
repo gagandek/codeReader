@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="id_length">6</integer>
+    <integer name="date_10">10</integer>
+    <integer name="date_8">8</integer>
 </resources>
