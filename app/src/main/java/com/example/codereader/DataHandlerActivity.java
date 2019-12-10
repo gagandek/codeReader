@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,46 +48,33 @@ public class DataHandlerActivity extends AppCompatActivity {
     public void reDirectToChildProgramme(View view) {
 
         Intent intent = getParams2(ChildProgram.class);
+        if(null == intent){
+            Toast.makeText(getApplicationContext(), "Invalid Code", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
         startActivity(intent);
     }
 
     public void reDirectToART(View view) {
 
         Intent intent = getParams2(ART.class);
+        if(null == intent){
+            Toast.makeText(getApplicationContext(), "Invalid Code", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
         startActivity(intent);
     }
 
     public void reDirectToTB(View view) {
         Intent intent = getParams2(TB.class);
+        if(null == intent){
+            Toast.makeText(getApplicationContext(), "Invalid Code", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
         startActivity(intent);
-    }
-
-    private Intent getParams(Class classToCall) {
-
-        String[] splited = rawData.split("\\r?\\n");
-        String name = splited[0].substring(5).trim();
-        String sex = splited[1].substring(4).trim();
-        String dob = splited[2].substring(6).trim();
-
-        String[] names = getNames(name);
-
-        Log.d(LOG_TAG, "************************");
-        Log.d(LOG_TAG, "Class: " + classToCall.getSimpleName());
-        Log.d(LOG_TAG, "Full name: " + name);
-        Log.d(LOG_TAG, "first name: " + names[0]);
-        Log.d(LOG_TAG, "last name: " + names[1]);
-        Log.d(LOG_TAG, "sex: " + sex);
-        Log.d(LOG_TAG, "dob: " + dob);
-        Log.d(LOG_TAG, "************************");
-
-        Intent intent = new Intent(this, classToCall);
-        intent.putExtra("name", name);
-        intent.putExtra("firstName", names[0]);
-        intent.putExtra("lastName", names[1]);
-        intent.putExtra("sex", sex);
-        intent.putExtra("dob", dob);
-
-        return intent;
     }
 
     public Intent getParams2(Class classToCall){
@@ -94,21 +82,29 @@ public class DataHandlerActivity extends AppCompatActivity {
         String name = null;
         String sex = null, dob = null, uniqueID = null;
 
+        boolean nameb = false, sexb = false, dobb = false, idb= false;
         for(String s : splited){
             if(s.contains("Name")){
                 name = s.substring(5).trim();
+                nameb = true;
             }
             if(s.contains("Sex")){
                 sex = s.substring(4).trim();
+                sexb = true;
             }
             if(s.contains("D.o.b")){
                 dob = s.substring(6).trim();
+                dobb = false;
             }
             if(s.contains("UniqueID")){
                 uniqueID = s.substring(9).trim();
+                idb = false;
             }
         }
 
+        if(!nameb && !sexb && !dobb && !idb){
+            return null;
+        }
         String[] names = getNames(name);
 
         Log.d(LOG_TAG, "************************");
