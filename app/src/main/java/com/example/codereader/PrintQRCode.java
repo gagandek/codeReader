@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +38,12 @@ public class PrintQRCode extends AppCompatActivity {
     }
 
     public void printTheCode(View view) {
+        Intent intent = getPackageManager().getLaunchIntentForPackage("com.brother.ptouch.designandprint");
+        if(intent != null && id != null){
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "There is no package to print the code", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void addImage() {

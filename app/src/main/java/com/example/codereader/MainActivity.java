@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Map<String, Patient> patientsFromDb;
     final static String INSTALLATION_DIR = "Android/data/dhis";
+    final static String QR_PATH = Environment.getExternalStorageDirectory().getPath()+"/QRCode/";
     final static String dataFile = "data.txt";
     public static int counter;
 

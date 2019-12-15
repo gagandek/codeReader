@@ -45,9 +45,6 @@ public class AddNewPatient extends AppCompatActivity {
         TextView textViewLastName = (TextView) findViewById(R.id.id_lastname_anp);
         String lastName = textViewLastName.getText().toString();
 
-        TextView textViewDob = (TextView) findViewById(R.id.id_date_anp);
-//        String dob = textViewDob.getText().toString();
-
         String dob = addDateOfBirth(view);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiobutton_group);
         int selectedGender = radioGroup.getCheckedRadioButtonId();
@@ -69,7 +66,6 @@ public class AddNewPatient extends AppCompatActivity {
                     Thread.sleep(500);
                     textViewFirstName.setText("");
                     textViewLastName.setText("");
-                    textViewDob.setText("");
                     Log.d(LOG_TAG, "Patient added: \n" + newId);
                     startPrintActivity(QRCodeGenerator.getPath(), newId);
                     finish();

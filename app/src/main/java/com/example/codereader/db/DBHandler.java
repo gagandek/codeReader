@@ -3,11 +3,9 @@ package com.example.codereader.db;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.codereader.DataHandlerActivity;
 import com.example.codereader.MainActivity;
 import com.example.codereader.QRCodeGenerator;
 import com.example.codereader.model.Patient;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -93,27 +91,10 @@ public class DBHandler {
             }
         }
 
-
         myOutWriter.close();
         out.flush();
         out.close();
         return status;
-    }
-
-    private void writAllToFile() {
-        for (Map.Entry<String, Patient> entry : patientsFromDb.entrySet()) {
-            String id = entry.getValue().getUniqueID();
-            String fullName = entry.getValue().getFullname();
-            String gender = entry.getValue().getGender();
-            String dob = entry.getValue().getDob();
-
-            String tuple = "[" + id
-                    + ", " + fullName
-                    + ", " + gender +
-                    ", " + dob + "]\n";
-
-            //write to file here
-        }
     }
 
     public static String generateID() {
@@ -132,22 +113,12 @@ public class DBHandler {
             String gender = entry.getValue().getGender();
             String dob = entry.getValue().getDob();
 
-            if (patient.getFullname().equals(fullName) && patient.getGender().equals(gender) && patient.getDob().equals(dob)) {
+            if (patient.getFullname().equals(fullName)
+                    && patient.getGender().equals(gender)
+                    && patient.getDob().equals(dob)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public static void findPatient(String input) {
-        if (patientsFromDb.containsKey(input)) {
-            Patient patient = patientsFromDb.get(input);
-            DataHandlerActivity.redirect(patient);
-        }
-    }
-
-    public String convertToJson(Patient patient) {
-        Gson gson = new Gson();
-        return gson.toJson(patient);
     }
 }

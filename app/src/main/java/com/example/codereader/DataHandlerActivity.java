@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.codereader.model.Patient;
-
 public class DataHandlerActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = DataHandlerActivity.class.getSimpleName();
@@ -38,6 +36,25 @@ public class DataHandlerActivity extends AppCompatActivity {
         }
     }
 
+    public void printCodeForExistingPatient(View view){
+        Intent intent = new Intent(this, PrintQRCode.class);
+        intent.putExtra("id", extrctID());
+        intent.putExtra("path", MainActivity.QR_PATH);
+        startActivity(intent);
+    }
+
+    private String extrctID() {
+        String[] splited = rawData.split("\\r?\\n");
+        String id = null;
+
+        for (String s : splited) {
+            if (s.contains("UniqueID")) {
+                id = s.substring(9).trim();
+            }
+        }
+        return id;
+    }
+
     public void scanANewPatient(View view) {
         finish();
         /** not the correct way to do it.. ? */
@@ -47,7 +64,7 @@ public class DataHandlerActivity extends AppCompatActivity {
 
     public void reDirectToChildProgramme(View view) {
 
-        Intent intent = getParams2(ChildProgram.class);
+        Intent intent = getParams(ChildProgram.class);
         if(null == intent){
             Toast.makeText(getApplicationContext(), "Invalid Code", Toast.LENGTH_SHORT).show();
             return;
@@ -58,7 +75,7 @@ public class DataHandlerActivity extends AppCompatActivity {
 
     public void reDirectToART(View view) {
 
-        Intent intent = getParams2(ART.class);
+        Intent intent = getParams(ART.class);
         if(null == intent){
             Toast.makeText(getApplicationContext(), "Invalid Code", Toast.LENGTH_SHORT).show();
             return;
@@ -68,16 +85,16 @@ public class DataHandlerActivity extends AppCompatActivity {
     }
 
     public void reDirectToTB(View view) {
-        Intent intent = getParams2(TB.class);
-        if(null == intent){
+        Intent intent = getParams(TB.class);//gets the parameters from the raw data
+        if(null == intent){     //checks if the QR read the vailed info
             Toast.makeText(getApplicationContext(), "Invalid Code", Toast.LENGTH_SHORT).show();
             return;
 
         }
-        startActivity(intent);
+        startActivity(intent); //starts the TB activity
     }
 
-    public Intent getParams2(Class classToCall){
+    public Intent getParams(Class classToCall){
         String[] splited = rawData.split("\\r?\\n");
         String name = null;
         String sex = null, dob = null, uniqueID = null;
@@ -94,11 +111,11 @@ public class DataHandlerActivity extends AppCompatActivity {
             }
             if(s.contains("D.o.b")){
                 dob = s.substring(6).trim();
-                dobb = false;
+                dobb = true;
             }
             if(s.contains("UniqueID")){
                 uniqueID = s.substring(9).trim();
-                idb = false;
+                idb = true;
             }
         }
 
@@ -155,10 +172,6 @@ public class DataHandlerActivity extends AppCompatActivity {
         }
 
         return null;
-    }
-
-    public static void redirect(Patient patient){
-
     }
 }
 
