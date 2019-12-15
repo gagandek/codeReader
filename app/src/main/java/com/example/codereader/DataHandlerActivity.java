@@ -111,11 +111,11 @@ public class DataHandlerActivity extends AppCompatActivity {
             }
             if(s.contains("D.o.b")){
                 dob = s.substring(6).trim();
-                dobb = true;
+                dobb = false;
             }
             if(s.contains("UniqueID")){
                 uniqueID = s.substring(9).trim();
-                idb = true;
+                idb = false;
             }
         }
 

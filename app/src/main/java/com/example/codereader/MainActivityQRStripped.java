@@ -210,10 +210,10 @@ public class MainActivityQRStripped extends AppCompatActivity {  //extends Activ
         if(MainActivity.patientsFromDb.containsKey(input.trim())){
             Patient patient = MainActivity.patientsFromDb.get(input);
 
-            String tuple = "[" + patient.getUniqueID()
-                    + ", " + patient.getFullname().trim()
-                    + ", " + patient.getGender().trim() +
-                    ", " + patient.getDob().trim() + "]";
+            String tuple = "Name: " + patient.getFullname() + "\n"
+                    + "Sex: " + patient.getGender() + "\n"
+                    + "D.o.b: " + patient.getDob() + "\n"
+                    + "UniqueID: " + patient.getUniqueID()+ "\n";
             doSomething(tuple);
         }
     }

@@ -19,14 +19,11 @@ import androidx.core.content.ContextCompat;
 
 import com.example.codereader.db.DBHandler;
 
-import java.util.Calendar;
-
 public class AddNewPatient extends AppCompatActivity {
 
     private static final String LOG_TAG = AddNewPatient.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     DBHandler dbHandler;
-    final Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
