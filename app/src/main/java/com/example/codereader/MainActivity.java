@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Log.d(LOG_TAG, "----> reading the file");
                 String rawData = readInstallationFile(installation);
+                Log.d(LOG_TAG, "************");
+                Log.d(LOG_TAG, rawData);
+                Log.d(LOG_TAG, "************");
                 addToMap(rawData);
             }
             Log.d(LOG_TAG, "read from file: success");
@@ -94,18 +97,29 @@ public class MainActivity extends AppCompatActivity {
     private static void addToMap(String rawData) {
         int counter = 0;
         String[] tuples = rawData.split("\\r?\\n");
-        String name, sex, dob, uniqueID;
+        String name, sex, dob, uniqueID, village, physicalAdress;
 
         for (String t : tuples) {
             counter++;
             String[] tupleArray = t.split(",");
+            Log.d(LOG_TAG, "***** SIZE: " + tupleArray.length);
             uniqueID = tupleArray[0].substring(1).trim();
             name = tupleArray[1].trim();
             sex = tupleArray[2].trim();
             dob = tupleArray[3].substring(0, tupleArray[3].length() - 1).trim();
-
             String[] names = DataHandlerActivity.getNames(name);
-            Patient p = new Patient(uniqueID, name, names[0], names[1], dob, sex);
+            Patient p;
+            if(tupleArray.length>4){
+
+                dob = tupleArray[3].trim();
+                village = tupleArray[4].trim();
+                physicalAdress = tupleArray[5].trim();
+                Log.d(LOG_TAG , "NOW: " + dob + " " + village +" "+physicalAdress );
+                p = new Patient(uniqueID, name, names[0], names[1], dob, sex, village, physicalAdress);
+            }else{
+
+                p = new Patient(uniqueID, name, names[0], names[1], dob, sex);
+            }
             patientsFromDb.put(uniqueID, p);
             Log.d(LOG_TAG, p.toString());
         }

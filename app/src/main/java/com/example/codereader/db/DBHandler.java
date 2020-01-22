@@ -23,15 +23,18 @@ public class DBHandler {
     public static int idCounter = MainActivity.counter;
 
     public String addPatient2(String[] params) {
-        boolean retValue = checkDuplicate(new Patient(null, params[0], params[1], params[2], params[3], params[4]));
+        boolean retValue = checkDuplicate(new Patient(null, params[0], params[1], params[2], params[3], params[4], params[5], params[6]));
 
         if (!retValue) {
             String id = generateID();
-            Patient patient = new Patient(id, params[0], params[1], params[2], params[3], params[4]);
+            Patient patient = new Patient(id, params[0], params[1], params[2], params[3], params[4], params[5], params[6]);
             String tuple = "[" + patient.getUniqueID()
                     + ", " + patient.getFullname().trim()
-                    + ", " + patient.getGender().trim() +
-                    ", " + patient.getDob().trim() + "]\n";
+                    + ", " + patient.getGender().trim()
+                    + ", " + patient.getDob().trim()
+                    + ", " + patient.getVillage().trim()
+                    + ", " + patient.getPhysicalAddress().trim()
+                    + "]\n";
 
             patientsFromDb.put(id, patient);
             writeToFile(tuple, patient, retValue);  //write to file--> only items which are present in the map
@@ -112,10 +115,14 @@ public class DBHandler {
             String fullName = entry.getValue().getFullname();
             String gender = entry.getValue().getGender();
             String dob = entry.getValue().getDob();
+            String village = entry.getValue().getVillage();
+            String physicalAddress = entry.getValue().getPhysicalAddress();
 
             if (patient.getFullname().equals(fullName)
                     && patient.getGender().equals(gender)
-                    && patient.getDob().equals(dob)) {
+                    && patient.getDob().equals(dob)
+                    && patient.getVillage().equals(village)
+                    && patient.getPhysicalAddress().equals(physicalAddress)){
                 return true;
             }
         }

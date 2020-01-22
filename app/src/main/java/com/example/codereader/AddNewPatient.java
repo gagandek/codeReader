@@ -47,7 +47,13 @@ public class AddNewPatient extends AppCompatActivity {
         int selectedGender = radioGroup.getCheckedRadioButtonId();
         Button btnDisplay = (RadioButton) findViewById(selectedGender);
 
-        if (!validate(firstName, lastName, dob)) {
+        TextView textViewVillage = (TextView) findViewById(R.id.id_village_anp);
+        String village = textViewVillage.getText().toString();
+
+        TextView textViewPhysAdd = (TextView) findViewById(R.id.id_phys_add_anp);
+        String physicalAddress = textViewPhysAdd.getText().toString();
+
+        if (!validate(firstName, lastName, dob, village, physicalAddress)) {
             Toast.makeText(getApplicationContext(), "Missing input...", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -57,7 +63,7 @@ public class AddNewPatient extends AppCompatActivity {
             }
             String gender = (String) btnDisplay.getText();
             try {
-                String newId = dbHandler.addPatient2(new String[]{firstName + " " + lastName, firstName, lastName, dob, gender});
+                String newId = dbHandler.addPatient2(new String[]{firstName + " " + lastName, firstName, lastName, dob, gender, village, physicalAddress});
                 if (null != newId) {
                     Toast.makeText(getApplicationContext(), "Patient added with id: " + newId, Toast.LENGTH_LONG).show();
                     Thread.sleep(500);
@@ -84,8 +90,8 @@ public class AddNewPatient extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private boolean validate(String firstName, String lastName, String dob) {
-        if (!firstName.isEmpty() && !lastName.isEmpty() && !dob.isEmpty()) {
+    private boolean validate(String firstName, String lastName, String dob, String village, String physicalAddress) {
+        if (!firstName.isEmpty() && !lastName.isEmpty() && !dob.isEmpty() && !village.isEmpty() && !physicalAddress.isEmpty()) {
             return true;
         }
         Toast.makeText(getApplicationContext(), "Missing input", Toast.LENGTH_SHORT).show();

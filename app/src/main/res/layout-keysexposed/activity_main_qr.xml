@@ -15,6 +15,7 @@
         android:layout_marginRight="184dp"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="searchPatientInDb"
         app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
