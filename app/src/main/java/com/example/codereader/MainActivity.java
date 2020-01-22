@@ -172,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void lostBooklet(View view) {
+        Intent intent = new Intent(this, LostBooklet.class);
+        startActivity(intent);
     }
 
     public void newBooklet(View view) {

@@ -38,4 +38,6 @@
     <string name="new_booklet">New Booklet</string>
     <string name="lost_booklet">Lost Booklet</string>
     <string name="info_new_booklet">Info</string>
+    <string name="f_a_p">Find a patient</string>
+    <string name="search">Search</string>
 </resources>
