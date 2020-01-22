@@ -170,4 +170,12 @@ public class MainActivity extends AppCompatActivity {
             // permissions this app might request.
         }
     }
+
+    public void lostBooklet(View view) {
+    }
+
+    public void newBooklet(View view) {
+        Intent intent = new Intent(this, NewBooklet.class);
+        startActivity(intent);
+    }
 }

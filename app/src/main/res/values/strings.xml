@@ -35,4 +35,7 @@
     <string name="scan_code">Scan code</string>
     <string name="village">Village</string>
     <string name="phys_add">Physical address</string>
+    <string name="new_booklet">New Booklet</string>
+    <string name="lost_booklet">Lost Booklet</string>
+    <string name="info_new_booklet">Info</string>
 </resources>
