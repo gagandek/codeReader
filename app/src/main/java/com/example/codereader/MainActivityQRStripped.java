@@ -213,7 +213,8 @@ public class MainActivityQRStripped extends AppCompatActivity {  //extends Activ
             String tuple = "Name: " + patient.getFullname() + "\n"
                     + "Sex: " + patient.getGender() + "\n"
                     + "D.o.b: " + patient.getDob() + "\n"
-                    + "UniqueID: " + patient.getUniqueID()+ "\n";
+                    + "UniqueID: " + patient.getUniqueID()+ "\n"
+                    + "Village: " + patient.getVillage() + "\n";
             doSomething(tuple);
         }
     }
