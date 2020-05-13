@@ -10,8 +10,15 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LostBooklet"></activity>
-        <activity android:name=".NewBooklet" />
+        <activity android:name=".PatientsFound"></activity>
+        <activity
+            android:name=".LostBooklet"
+            android:label="Lost Health Passport"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NewBooklet"
+            android:label="New Health Passport"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PrintQRCode"
             android:label="@string/printCode"
@@ -50,9 +57,9 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
